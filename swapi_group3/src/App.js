@@ -5,6 +5,9 @@ import Characters from './components/Characters.js'
 import Films from './components/Films.js'
 
 function App() {
+
+
+
   return (
     <div className="App">
       <BrowserRouter>
