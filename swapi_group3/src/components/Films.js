@@ -19,10 +19,19 @@ async function getFilms(){
     })
 }
 let id;
-const handleClick = () => {
-    console.log('in handle click')
+function handleClick(film) {
+    console.log('in handle click', film.url)
+    let id = getIdFromUrl("films", film.url)
     navigate(`/film/${id}`)
 }
+
+const getIdFromUrl = (entityName, url) => {
+    const re = new RegExp(`.*${entityName}\/(\\d+).*`);
+    const matches = url.match(re)
+    if (!matches) throw `Bad URL. Not a ${entityName} URL.`
+    console.log(matches[1])
+    return matches[1]
+  }
 
 useEffect(() =>{
     getFilms()
@@ -32,7 +41,7 @@ useEffect(() =>{
         <>
         <h3>Show films here</h3>
         {films.map((film) => 
-        <li onClick={handleClick}>{film.title}</li>)}
+        <li onClick={()=> handleClick(film)}>{film.title}</li>)}
         </>
     )
 }
