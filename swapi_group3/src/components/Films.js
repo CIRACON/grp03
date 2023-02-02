@@ -4,7 +4,8 @@ import {useNavigate} from 'react-router-dom'
 function Films() {
 
 
-const [films, setFilms] = useState([])
+let [films, setFilms] = useState([])
+ 
 let navigate = useNavigate();
 
 
@@ -17,9 +18,10 @@ async function getFilms(){
       
     })
 }
-
+let id;
 const handleClick = () => {
     console.log('in handle click')
+    navigate(`/film/${id}`)
 }
 
 useEffect(() =>{
