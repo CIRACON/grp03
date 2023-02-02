@@ -1,5 +1,5 @@
 let mongodb = require("mongodb");
-const { MongoClient } = require("mongodb");
+//const { MongoClient } = require("mongodb");
 const url = "mongodb://localhost:27017";
 
 let swapiDB;
@@ -30,9 +30,32 @@ module.exports.getAllFilms = function (callback) {
 module.exports.getAllPlanets = (callback) => {
     planets.find().toArray((err, result) => {
         if (err) {
-            callback("Failed to find films", undefined);
+            callback("Failed to find planets", undefined);
         } else {
             callback(undefined, result);
         }
     })
+}
+let index = 1;
+module.exports.getOneFilm = (filmID, callback) => {
+    index = parseInt(filmID);
+    films.find({pk: index}).toArray((err, result) => {
+        if (err) {
+            callback("Failed to find film", undefined);
+        } else {
+            console.log(result);
+            callback(undefined, result);
+        }
+    });
+}
+
+module.exports.getOnePlanet = (planetID, callback) => {
+    index = parseInt(planetID);
+    planets.find({pk: index}).toArray((err, result) => {
+        if (err) {
+            callback("Failed to find planet", undefined);
+        } else {
+            callback(undefined, result);
+        }
+    });
 }
