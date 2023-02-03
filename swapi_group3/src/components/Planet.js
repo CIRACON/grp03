@@ -29,7 +29,13 @@ useEffect(() => {
 
     console.log(planet);
     return(
-        <h1>{planet?.fields?.name}</h1>
+        <>
+        <h1>{planet?.fields?.name}</h1> 
+        <p>Population: {planet?.fields?.population} inhabitants</p>
+        <p>Climate: {planet?.fields?.climate}</p>
+        <p>Terrain: {planet?.fields?.terrain}</p>
+        <p>Orbital Period: {planet?.fields?.climate}</p>
+        </>
     )
 }
 export default Planet
