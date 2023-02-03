@@ -25,7 +25,12 @@ function Film() {
 
 
     }
+    function handlePersonClick(person) {
+        console.log(person)
+        navigate(`/people/${person}`)
 
+
+    }
 useEffect(() => {
     getFilm()
 }, [])
@@ -38,7 +43,7 @@ useEffect(() => {
 <p>Episode: {film?.fields?.episode_id}</p>
 <h2>Characters</h2>
 {film?.fields?.characters.map((character) =>
-<p>{character}</p>)}
+<p onClick={() => handlePersonClick(character)}>{character}</p>)}
 <h2>Planets</h2>
 {film?.fields?.planets.map((planet) =>
 <p onClick={() => handlePlanetClick(planet)}>{planet}</p>)}

@@ -6,7 +6,7 @@ import Films from './components/Films.js'
 import Film from './components/Film.js'
 import Planets from './components/Planets.js'
 import Planet from './components/Planet.js'
-
+import Character from './components/Character.js'
 function App() {
 
 
@@ -20,6 +20,7 @@ function App() {
         <Route path="/film/:id" element={<Film/>}/>
         <Route path="/planets" element={<Planets/>}/>
         <Route path="/planet/:id" element={<Planet/>}/>
+        <Route path="/people/:id" element={<Character/>}/>
         
         </Routes>
         </BrowserRouter>

@@ -29,6 +29,18 @@ app.get("/planets", (req, res) => {
     });
 });
 
+app.get("/people", (req, res) => {
+    dao.getAllPeople((err, people) => {
+        if(people) {
+            console.log(people);
+            res.send(people);
+        } else {
+            res.statusCode = 500;
+            res.end();
+        }
+    });
+});
+
 app.get("/films/:filmID", (req, res) => {
     dao.getOneFilm(req.params.filmID, (err, film) => {
         if (film) {
@@ -46,6 +58,18 @@ app.get("/planets/:planetID", (req, res) => {
         if (planet) {
           console.log("GET single planet: " +  req.params.planetID );
           res.send(planet[0]);
+        } else {
+          res.statusCode = 404;
+          res.end();
+        }
+    });
+});
+
+app.get("/people/:personID", (req, res) => {
+    dao.getOnePeople(req.params.personID, (err, person) => {
+        if (person) {
+          console.log("GET single planet: " +  req.params.personID );
+          res.send(person[0]);
         } else {
           res.statusCode = 404;
           res.end();
