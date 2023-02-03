@@ -1,13 +1,14 @@
 const express = require("express");
+const cors = require('cors');
 const dao = require("./mongodao");
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/films", (req, res) => {
     dao.getAllFilms((err, films) => {
         if(films) {
-            console.log(films);
             res.send(films);
         } else {
             res.statusCode = 500;
@@ -31,8 +32,8 @@ app.get("/planets", (req, res) => {
 app.get("/films/:filmID", (req, res) => {
     dao.getOneFilm(req.params.filmID, (err, film) => {
         if (film) {
-          console.log("GET single film: " +  req.params.filmID );
-          res.send(film);
+          console.log(film);
+          res.send(film[0]);
         } else {
           res.statusCode = 404;
           res.end();
@@ -44,7 +45,7 @@ app.get("/planets/:planetID", (req, res) => {
     dao.getOnePlanet(req.params.planetID, (err, planet) => {
         if (planet) {
           console.log("GET single planet: " +  req.params.planetID );
-          res.send(planet);
+          res.send(planet[0]);
         } else {
           res.statusCode = 404;
           res.end();

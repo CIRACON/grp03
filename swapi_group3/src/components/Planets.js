@@ -1,30 +1,30 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-function Films() {
+function Planets() {
 
 
-let [films, setFilms] = useState([])
+let [planets, setPlanets] = useState([])
 let navigate = useNavigate();
 
 
-async function getFilms(){
-    await fetch('http://localhost:5000/films', {
+async function getPlanets(){
+    await fetch('http://localhost:5000/planets', {
         method: 'GET',    
         withCredentials: true,    
         crossorigin: true
     })
     .then((response) => response.json())
-    .then((returnedFilms) => {
-        console.log(returnedFilms);
-        setFilms(returnedFilms)
+    .then((p) => {
+        console.log(p)
+        setPlanets(p)
     })
 }
 let id;
-function handleClick(film) {
-    console.log('in handle click', film.pk)
-    let id = film.pk
-    navigate(`/film/${id}`)
+function handleClick(planet) {
+    console.log('in handle click', planet.pk)
+    let id = planet.pk
+    navigate(`/planet/${id}`)
 }
 
 const getIdFromUrl = (entityName, url) => {
@@ -36,16 +36,16 @@ const getIdFromUrl = (entityName, url) => {
   }
 
 useEffect(() =>{
-    getFilms()
+    getPlanets()
 }, [])
     
     return (
         <>
-        <h3>Show films here</h3>
-        {films.map((film) => 
-        <li onClick={()=> handleClick(film)}>{film.fields.title}</li>)}
+        <h3>Show planets here</h3>
+        {planets.map((planet) => 
+        <li onClick={()=> handleClick(planet)}>{planet.fields.name}</li>)}
         </>
     )
 }
 
-export default Films
+export default Planets
