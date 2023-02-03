@@ -1,8 +1,9 @@
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 
 function Film() {
  
+    let navigate = useNavigate()
     let id = useParams()
     // console.log(typeof id.id)
     let id2 = parseInt(id.id)
@@ -18,12 +19,30 @@ function Film() {
         })
     }
 
+    function handlePlanetClick(planet) {
+        console.log(planet)
+        navigate(`/planet/${planet}`)
+
+
+    }
+
 useEffect(() => {
     getFilm()
 }, [])
 
     return(
+        <>
 <h1>{film?.fields?.title}</h1>
+<p>Released: {film?.fields?.release_date}</p>
+<p>Director: {film?.fields?.director}</p>
+<p>Episode: {film?.fields?.episode_id}</p>
+<h2>Characters</h2>
+{film?.fields?.characters.map((character) =>
+<p>{character}</p>)}
+<h2>Planets</h2>
+{film?.fields?.planets.map((planet) =>
+<p onClick={() => handlePlanetClick(planet)}>{planet}</p>)}
+</>
     )
 }
 export default Film
