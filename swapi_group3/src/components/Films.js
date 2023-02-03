@@ -1,5 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {Avatar, List, Space} from 'antd'
+import Planets from './Planets';
 
 function Films() {
 
@@ -16,7 +18,6 @@ async function getFilms(){
     })
     .then((response) => response.json())
     .then((returnedFilms) => {
-        console.log(returnedFilms);
         setFilms(returnedFilms)
     })
 }
@@ -38,12 +39,47 @@ const getIdFromUrl = (entityName, url) => {
 useEffect(() =>{
     getFilms()
 }, [])
-    
+    films.sort((a, b) => {
+        return a.fields.episode_id - b.fields.episode_id;
+    })
+    const imgUrl = (filmID) => {
+        return `images/swapi${filmID}.jpg`;
+    }
     return (
         <>
-        <h3>Show films here</h3>
+        <h1>List of All GOOD Star Wars Films</h1>
+        {/* <h3>Show films here</h3>
         {films.map((film) => 
-        <li onClick={()=> handleClick(film)}>{film.fields.title}</li>)}
+        <li onClick={()=> handleClick(film)}>{film.fields.title}</li>)} */}
+        <List
+    itemLayout="vertical"
+    size="large"
+    dataSource={films}
+    footer={
+      <div>
+        <b>So Good</b>
+      </div>
+    }
+    renderItem={(item) => (
+      <List.Item
+        key={item.fields.title}
+        actions={[]}
+        extra={
+          <img
+            width={272}
+            alt="logo"
+            src={imgUrl(item.fields.episode_id)}
+          />
+        }
+      >
+        <List.Item.Meta
+          title={<a onClick={()=> handleClick(item)}>{item.fields.title}</a>}
+          description={item.fields.episode_id}
+        />
+        {item.fields.opening_crawl}
+      </List.Item>
+    )}
+  />
         </>
     )
 }

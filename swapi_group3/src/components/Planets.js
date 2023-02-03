@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {Avatar, List} from 'antd'
 
 function Planets() {
 
@@ -41,9 +42,22 @@ useEffect(() =>{
     
     return (
         <>
-        <h3>Show planets here</h3>
+        <h1>List of Planets</h1>
+        {/* <h3>Show planets here</h3>
         {planets.map((planet) => 
-        <li onClick={()=> handleClick(planet)}>{planet.fields.name}</li>)}
+        <li onClick={()=> handleClick(planet)}>{planet.fields.name}</li>)} */}
+        <List
+    itemLayout="horizontal"
+    dataSource={planets}
+    renderItem={(item) => (
+      <List.Item>
+        <List.Item.Meta
+          title={<a onClick={()=> handleClick(item)}>{item.fields.name}</a>}
+          description={item.fields.population}
+        />
+      </List.Item>
+    )}
+  />
         </>
     )
 }
