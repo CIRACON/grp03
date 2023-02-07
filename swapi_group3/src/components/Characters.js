@@ -46,25 +46,34 @@ function Characters(){
       filterPeople(people, searchTerm)
      }, [searchTerm]) 
 
+if(searchPeople[0]) {
 
-    return (
+   return (
       <>
         <h1>Star Wars Universe Lookup</h1>
         <h3>What are you looking for?</h3>
         <form onSubmit={handleSubmit}>
           <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
-        <button type="submit">Search</button>
         </form>
         
         {searchPeople.map((person)=>
         <p>{person.fields.name}</p>)}
-        
-        {people.map((person) =>
-        <p onClick={()=>handleClick(person)}>{person?.fields?.name}</p>)}
+        </>)} else {
+return(
+  <>
+  <h1>Star Wars Universe Lookup</h1>
+        <h3>What are you looking for?</h3>
+        <form onSubmit={handleSubmit}>
+          <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
+        </form>
+{people.map((person) =>
+  <p onClick={()=>handleClick(person)}>{person?.fields?.name}</p>)}
 
-        </>
+  </>
+        
+        
 
     )
-}
+}}
 
 export default Characters
