@@ -13,6 +13,11 @@ function Characters(){
       console.log(searchTerm)
     }
 
+    function handleClick(person) {
+      let id = person.pk
+      navigate(`/people/${id}`)
+    }
+
      async function getPeople(){
         await fetch('http://localhost:5000/people', {
              method: 'GET',    
@@ -39,8 +44,8 @@ function Characters(){
           <input type="text" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}></input>
         <button type="submit">Search</button>
         </form>
-        <button onClick={()=>navigate('/films')}>Click for Films</button> 
-        <button onClick={()=>navigate('/planets')}>Click for Planets</button>
+        {people.map((person) =>
+        <p onClick={()=>handleClick(person)}>{person?.fields?.name}</p>)}
 
         </>
 
