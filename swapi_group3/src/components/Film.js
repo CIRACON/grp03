@@ -7,13 +7,14 @@ function Film() {
     let id = useParams()
     // console.log(typeof id.id)
     let id2 = parseInt(id.id)
-    // console.log(typeof id2)
     let [film, setFilm] = useState({});
+    const filmArr = JSON.parse(localStorage.getItem('films'));
+    console.log(filmArr[id2-1]);
     async function getFilm(){
         await fetch(`http://localhost:5000/films/${id2}`)
         .then((response) => response.json())
         .then((returnedFilm) => {
-            console.log(returnedFilm)
+            //console.log(returnedFilm)
             setFilm(returnedFilm);
             //setFilms(returnedFilms.results)
         })
@@ -32,7 +33,7 @@ function Film() {
 
     }
 useEffect(() => {
-    getFilm()
+    setFilm(filmArr[id2-1])
 }, [])
 
     return(

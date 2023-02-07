@@ -23,8 +23,8 @@ async function getFilms(){
 }
 let id;
 function handleClick(film) {
-    console.log('in handle click', film.pk)
-    let id = film.pk
+    console.log('in handle click', film.fields.episode_id)
+    let id = film.fields.episode_id
     navigate(`/film/${id}`)
 }
 
@@ -42,6 +42,8 @@ useEffect(() =>{
     films.sort((a, b) => {
         return a.fields.episode_id - b.fields.episode_id;
     })
+    localStorage.setItem('films', JSON.stringify(films))
+    console.log(localStorage.getItem('films'))
     const imgUrl = (filmID) => {
         return `images/swapi${filmID}.jpg`;
     }

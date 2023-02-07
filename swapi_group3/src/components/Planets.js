@@ -17,7 +17,7 @@ async function getPlanets(){
     })
     .then((response) => response.json())
     .then((p) => {
-        console.log(p)
+       // console.log(p)
         setPlanets(p)
     })
 }
@@ -39,7 +39,12 @@ const getIdFromUrl = (entityName, url) => {
 useEffect(() =>{
     getPlanets()
 }, [])
-    
+    planets.sort((a, b) => {
+        return a.pk - b.pk;
+    })
+    console.log(planets);
+    localStorage.setItem("planets", JSON.stringify(planets))
+    //console.log(JSON.parse(localStorage.getItem("planets")))
     return (
         <>
         <h1>List of Planets</h1>
