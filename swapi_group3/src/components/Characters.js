@@ -5,6 +5,7 @@ import {Navigate, useNavigate} from 'react-router-dom'
 function Characters(){
  
     let navigate = useNavigate()
+    const [searchTerm, setSearchTerm] = useState();
     
 
     // async function getPeople(){
@@ -25,6 +26,10 @@ function Characters(){
       <>
         <h1>Star Wars Universe Lookup</h1>
         <h3>What are you looking for?</h3>
+        <form type="submit" value="searchTerm">
+        <input></input>
+        <button>Search</button>
+        </form>
         <button onClick={()=>navigate('/films')}>Click for Films</button> 
         <button onClick={()=>navigate('/planets')}>Click for Planets</button>
 
